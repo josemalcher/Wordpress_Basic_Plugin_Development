@@ -109,11 +109,15 @@ license.txt
 readme.html
 index.php
 xmlrpc.php
-wp-*
-wp-content/*
+#wp-*
+#wp-content/*
+wp-content/languages/*
 wp-content/mu-plugins/
+!wp-content/plugins/wp-next-plugin/*
 !wp-content/plugins/
 !wp-content/themes/
+wp-admin/*
+wp-includes/*
 
 # ignore these plugins
 wp-content/plugins/hello.php
@@ -130,3 +134,17 @@ node_modules/
 *.sqlite
 
 # End of https://www.gitignore.io/api/wordpress,phpstorm+all,visualstudiocode
+/wp-content/plugins/akismet/
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-config.php
+/wp-config-sample.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
