@@ -16,9 +16,10 @@ if (count($all_students) > 0) {
     <table class="wp-list-table widefat fixed striped posts">
         <thead>
         <tr>
-            <th scope="col" id="author" class="manage-column column-author">ID</th>
-            <th scope="col" id="categories" class="manage-column column-categories">Nome</th>
-            <th scope="col" id="tags" class="manage-column column-tags">E-MAIL</th>
+            <th scope="col" id="id"      class="manage-column column-id">ID</th>
+            <th scope="col" id="name"    class="manage-column column-name">Nome</th>
+            <th scope="col" id="email"   class="manage-column column-email">E-mail</th>
+            <th scope="col" id="actions" class="manage-column column-actions">Actions</th>
         </tr>
         </thead>
 
@@ -29,14 +30,17 @@ if (count($all_students) > 0) {
             ?>
             <tr id="<?= $student['id'] ?>"
                 class="iedit author-self level-0 post-1 type-post status-publish format-standard hentry category-Dummy category">
-                <td class="author column-author" data-colname="Email">
+                <td class="author column-id" data-colname="Email">
                     <a href="javascript:void(0)"><?= $student['id'] ?></a>
                 </td>
-                <td class="categories column-categories" data-colname="Name">
+                <td class="categories column-name" data-colname="Name">
                     <a href="javascript:void(0)"><?= $student['name'] ?></a>
                 </td>
-                <td class="categories column-categories" data-colname="Name">
+                <td class="categories column-email" data-colname="Email">
                     <a href="javascript:void(0)"><?= $student['email'] ?></a>
+                </td>
+                <td class="categories column-actions" data-colname="Actions">
+                    <a href="admin.php?page=wp-next-add&action=edit&id=<?=$student['id']?>">Edit</a> | <a href="admin.php?page=wp-next-plugin">Delete</a>
                 </td>
             </tr>
             <?php
@@ -45,9 +49,10 @@ if (count($all_students) > 0) {
         </tbody>
         <tfoot>
         <tr>
-            <th scope="col" id="author" class="manage-column column-author">ID</th>
-            <th scope="col" id="categories" class="manage-column column-categories">Nome</th>
-            <th scope="col" id="tags" class="manage-column column-tags">E-MAIL</th>
+            <th scope="col" id="id"      class="manage-column column-id">ID</th>
+            <th scope="col" id="name"    class="manage-column column-name">Nome</th>
+            <th scope="col" id="email"   class="manage-column column-email">E-mail</th>
+            <th scope="col" id="actions" class="manage-column column-actions">Actions</th>
         </tr>
         </tfoot>
     </table>
