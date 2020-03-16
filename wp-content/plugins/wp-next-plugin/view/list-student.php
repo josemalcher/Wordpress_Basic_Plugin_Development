@@ -1,13 +1,32 @@
 <?php
-
 global $wpdb;
-
 $all_students = $wpdb->get_results(
-    $wpdb->prepare("SELECT * FROM wp_basicplugindevelopment.wp_next_plugin_tbl", ""), ARRAY_A
+    $wpdb->prepare(
+        "SELECT * from wp_next_plugin_tbl", ""
+    ), ARRAY_A
 );
-//echo "<pre>";
-//print_r($all_students);
-//
+
+$action = isset($_GET['action']) ? trim($_GET['action']) : "";
+$id     = isset($_GET['id']) ? intval($_GET['id']) : "";
+if (!empty($action) && $action == "delete") {
+
+    $row_exists = $wpdb->get_row(
+        $wpdb->prepare(
+            "SELECT * from wp_next_plugin_tbl WHERE id = %d", $id
+        )
+    );
+
+    if ($row_exists > 0) {
+        $wpdb->delete("wp_next_plugin_tbl", array(
+            "id" => $id
+        ));
+    }
+    ?>
+    <script>
+        location.href = "<?=site_url();?>/wp-admin/admin.php?page=wp-next-plugin";
+    </script>
+    <?php
+}
 if (count($all_students) > 0) {
     ?>
 
@@ -31,16 +50,16 @@ if (count($all_students) > 0) {
             <tr id="<?= $student['id'] ?>"
                 class="iedit author-self level-0 post-1 type-post status-publish format-standard hentry category-Dummy category">
                 <td class="author column-id" data-colname="Email">
-                    <a href="javascript:void(0)"><?= $student['id'] ?></a>
+                    <a href="javascript:void(0)"><?=$student['id'] ?></a>
                 </td>
                 <td class="categories column-name" data-colname="Name">
-                    <a href="javascript:void(0)"><?= $student['name'] ?></a>
+                    <a href="javascript:void(0)"><?=$student['name'] ?></a>
                 </td>
                 <td class="categories column-email" data-colname="Email">
-                    <a href="javascript:void(0)"><?= $student['email'] ?></a>
+                    <a href="javascript:void(0)"><?=$student['email'] ?></a>
                 </td>
                 <td class="categories column-actions" data-colname="Actions">
-                    <a href="admin.php?page=wp-next-add&action=edit&id=<?=$student['id']?>">Edit</a> | <a href="admin.php?page=wp-next-plugin">Delete</a>
+                    <a href="admin.php?page=wp-next-add&action=edit&id=<?php echo $student['id']; ?>">Edit</a> | <a href="admin.php?page=wp-next-plugin&id=<?php echo $student['id']; ?>&action=delete" onclick="return confirm('Are you sure want to delete?')">Delete</a>
                 </td>
             </tr>
             <?php
